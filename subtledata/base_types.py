@@ -9,10 +9,11 @@ class SDInterface(object):
     def __init__(self, parent, *args, **kwargs):
         if hasattr(parent, 'api_key'):
             self._api_key = parent.api_key
+            
         else:
             self._api_key = parent._api_key
-
-        self._use_cache = parent._use_cache
+            
+        self._use_cache = parent._use_cache    
         self._api_client = parent._api_client
         self._swagger_locations_api = LocationsApi(self._api_client)
         self._swagger_users_api = UsersApi(self._api_client)
