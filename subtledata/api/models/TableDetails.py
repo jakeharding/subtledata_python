@@ -21,7 +21,7 @@ class TableDetails:
 
     def __init__(self):
         self.swaggerTypes = {
-            'pos_table_id': 'int',
+            'pos_table_id': 'str',
             'subtledata_id': 'int',
             'revenue_center_name': 'str',
             'revenue_center_id': 'int',
@@ -32,7 +32,7 @@ class TableDetails:
 
 
         #Table Identifier
-        self.pos_table_id = None # int
+        self.pos_table_id = None # str
         #Table ID
         self.subtledata_id = None # int
         #Revenue Center Name
