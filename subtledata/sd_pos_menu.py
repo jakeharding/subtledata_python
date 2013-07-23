@@ -35,7 +35,9 @@ class SDPOSMenu(SDFirstClassObject):
             #Store the items
             for index, item in enumerate(category.items):
                 setattr(item, 'category', category.pos_category_name)
-                sd_item = SDMenuItem(parent=self, location=self._location, swagger_menu_item=item, use_cache=self._use_cache)
+#                sd_item = SDMenuItem(parent=self, location=self._location, swagger_menu_item=item, use_cache=self._use_cache)
+                #quick fix for now. I have an open issue of GitHub because the statement above causes an error
+                sd_item=item
                 self.items.append(sd_item)
                 self._item_name_dict[item.name] = sd_item
                 self._item_id_dict[item.item_id] = sd_item
