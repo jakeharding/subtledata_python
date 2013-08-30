@@ -42,16 +42,20 @@ class SDTable(SDFirstClassObject):
             else:
                 self.__setattr__('_swagger_tickets', getattr(self._swagger_table, 'open_tickets'))
 
-    def open_ticket(self, user_id, device_id, number_of_people_in_party=1, business_expense=False, custom_ticket_name=None, return_ticket_details=False):
+    def open_ticket(self, user_id, device_id, number_of_people_in_party=1, business_expense=False, custom_ticket_name=None, return_ticket_details=False, employee=None):
         """
-
+        Added employee parameter, J.Harding, Verisage, LLC, 8/30/13
+        
         :param user_id:
         :param device_id:
         :param number_of_people_in_party:
         :param business_expense:
         :param custom_ticket_name:
         :param return_ticket_details:
+        :param employee: 
         :return: :raise:
+        
+        
         """
         if hasattr(self, 'revenue_center_id') and hasattr(self, 'subtledata_id'):
             ticket_body = {
@@ -61,11 +65,16 @@ class SDTable(SDFirstClassObject):
                 "device_id": device_id,
                 "table_id": self.subtledata_id,
                 "business_expense": business_expense,
-                "custom_ticket_name": custom_ticket_name
+                "custom_ticket_name": custom_ticket_name,
             }
         else:
             raise KeyError('Table missing key data')
-
+        
+        if not employee:
+            pass
+        else:
+            ticket_body.update({"employee_id": employee.employee_id})
+            
         #Send the request
         ticket_response = self._swagger_locations_api.createTicket(self.location._location_id, self._api_key, ticket_type='dine-in', body=ticket_body)
 
